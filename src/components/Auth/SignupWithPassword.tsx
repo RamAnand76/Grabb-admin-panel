@@ -33,12 +33,7 @@ export default function SignupWithPassword() {
     try {
       const callbackURL = searchParams.get("callbackUrl") || "/";
 
-      await signUp.email({
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        callbackURL,
-      });
+      await signUp();
       router.push(callbackURL);
       toast.success("Sign up successful");
     } catch (err) {

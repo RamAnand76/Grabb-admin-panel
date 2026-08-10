@@ -1,0 +1,220 @@
+"use client";
+
+import { useState } from "react";
+import { TrashTabWrapper } from "@/components/common/trash-tab-wrapper";
+import { ConfirmModal } from "@/components/common/confirm-modal";
+
+interface Category {
+  id: string;
+  name: string;
+  subcategoriesCount: number;
+  productsCount: number;
+  status: "active" | "inactive";
+  isDeleted?: boolean;
+}
+
+export default function CategoriesPage() {
+  const [tab, setTab] = useState<"active" | "trash">("active");
+  const [categories, setCategories] = useState<Category[]>([
+    { id: "c1", name: "Fresh Vegetables", subcategoriesCount: 8, productsCount: 142, status: "active" },
+    { id: "c2", name: "Fresh Fruits", subcategoriesCount: 6, productsCount: 98, status: "active" },
+    { id: "c3", name: "Dairy & Eggs", subcategoriesCount: 5, productsCount: 76, status: "active" },
+    { id: "c4", name: "Bakery & Bread", subcategoriesCount: 4, productsCount: 52, status: "active" },
+    { id: "c5", name: "Beverages & Juices", subcategoriesCount: 7, productsCount: 110, status: "inactive" },
+    { id: "c6", name: "Seasonal Exotic Goods", subcategoriesCount: 2, productsCount: 15, status: "active", isDeleted: true },
+  ]);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null);
+  const [formName, setFormName] = useState("");
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
+
+  const activeCategories = categories.filter((c) => !c.isDeleted);
+  const trashCategories = categories.filter((c) => c.isDeleted);
+
+  const handleSave = () => {
+    if (!formName.trim()) return;
+    if (editingCategory) {
+      setCategories((prev) =>
+        prev.map((c) => (c.id === editingCategory.id ? { ...c, name: formName } : c))
+      );
+    } else {
+      setCategories((prev) => [
+        ...prev,
+        {
+          id: `c_${Date.now()}`,
+          name: formName,
+          subcategoriesCount: 0,
+          productsCount: 0,
+          status: "active",
+        },
+      ]);
+    }
+    setModalOpen(false);
+    setFormName("");
+    setEditingCategory(null);
+  };
+
+  const handleSoftDelete = (id: string) => {
+    setCategories((prev) => prev.map((c) => (c.id === id ? { ...c, isDeleted: true } : c)));
+  };
+
+  const handleRestore = (id: string) => {
+    setCategories((prev) => prev.map((c) => (c.id === id ? { ...c, isDeleted: false } : c)));
+  };
+
+  const toggleStatus = (id: string) => {
+    setCategories((prev) =>
+      prev.map((c) =>
+        c.id === id ? { ...c, status: c.status === "active" ? "inactive" : "active" } : c
+      )
+    );
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-dark dark:text-white">Category Management</h1>
+          <p className="text-sm text-dark-4 dark:text-dark-6">
+            Admin-only master product categories. Soft delete throughout (no data loss).
+          </p>
+        </div>
+        <button
+          onClick={() => {
+            setEditingCategory(null);
+            setFormName("");
+            setModalOpen(true);
+          }}
+          className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-1 hover:bg-primary/90 transition-colors self-start sm:self-auto"
+        >
+          + Add Category
+        </button>
+      </div>
+
+      <TrashTabWrapper
+        activeTab={tab}
+        onTabChange={setTab}
+        activeCount={activeCategories.length}
+        trashCount={trashCategories.length}
+      >
+        <div className="rounded-2xl bg-white p-6 shadow-1 dark:bg-gray-dark border border-stroke dark:border-stroke-dark overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm text-dark dark:text-white">
+              <thead className="bg-gray-2 text-xs font-semibold uppercase text-dark-4 dark:bg-dark-2 dark:text-dark-6">
+                <tr>
+                  <th className="p-3">Category Name</th>
+                  <th className="p-3">Subcategories</th>
+                  <th className="p-3">Total Products</th>
+                  <th className="p-3">Status</th>
+                  <th className="p-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-stroke dark:divide-stroke-dark">
+                {(tab === "active" ? activeCategories : trashCategories).map((cat) => (
+                  <tr key={cat.id} className="hover:bg-gray-2 dark:hover:bg-dark-2">
+                    <td className="p-3 font-bold">{cat.name}</td>
+                    <td className="p-3">{cat.subcategoriesCount} subcategories</td>
+                    <td className="p-3">{cat.productsCount} products</td>
+                    <td className="p-3">
+                      <button
+                        onClick={() => toggleStatus(cat.id)}
+                        className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          cat.status === "active"
+                            ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300"
+                            : "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+                        }`}
+                      >
+                        {cat.status.toUpperCase()}
+                      </button>
+                    </td>
+                    <td className="p-3 text-right space-x-2">
+                      {tab === "active" ? (
+                        <>
+                          <button
+                            onClick={() => {
+                              setEditingCategory(cat);
+                              setFormName(cat.name);
+                              setModalOpen(true);
+                            }}
+                            className="rounded-lg bg-gray-2 px-3 py-1.5 text-xs font-semibold text-dark hover:bg-gray-3 dark:bg-dark-2 dark:text-white"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => setDeleteTargetId(cat.id)}
+                            className="rounded-lg bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-600 hover:bg-rose-100 dark:bg-rose-950/40 dark:text-rose-400"
+                          >
+                            Delete
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          onClick={() => handleRestore(cat.id)}
+                          className="rounded-lg bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-600 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-400"
+                        >
+                          Restore
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </TrashTabWrapper>
+
+      {/* Add / Edit Category Modal */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-dark border border-stroke dark:border-stroke-dark">
+            <h3 className="text-lg font-bold text-dark dark:text-white mb-4">
+              {editingCategory ? "Edit Category" : "Add New Category"}
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-dark dark:text-white mb-1">
+                  Category Name <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
+                  placeholder="e.g. Organic Produce"
+                  className="w-full rounded-lg border border-stroke bg-gray-2 p-3 text-sm text-dark outline-none focus:border-primary dark:border-stroke-dark dark:bg-dark-2 dark:text-white"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end gap-3 mt-6">
+              <button
+                onClick={() => setModalOpen(false)}
+                className="rounded-lg border border-stroke px-4 py-2 text-sm font-medium text-dark dark:border-stroke-dark dark:text-white"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90"
+              >
+                Save Category
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={Boolean(deleteTargetId)}
+        onClose={() => setDeleteTargetId(null)}
+        onConfirm={() => {
+          if (deleteTargetId) handleSoftDelete(deleteTargetId);
+        }}
+        title="Soft Delete Category"
+        description="Are you sure? This category will be moved to the Trash tab and hidden from the client app, but data will be safely retained."
+        confirmLabel="Move to Trash"
+      />
+    </div>
+  );
+}

@@ -53,9 +53,9 @@ export function UserInfo() {
   }
 
   const user = {
-    name: session?.data?.user?.name as string,
-    email: session?.data?.user?.email as string,
-    img: session?.data?.user?.image as string,
+    name: session?.data?.user?.name || "Admin",
+    email: session?.data?.user?.email || "admin@example.com",
+    img: session?.data?.user?.image || "",
   };
 
   return (

@@ -6,88 +6,103 @@ export const NAV_DATA = [
     items: [
       {
         title: "Dashboard",
+        url: "/",
         icon: Icons.HomeIcon,
-        items: [
-          {
-            title: "eCommerce",
-            url: "/",
-          },
-        ],
-      },
-      {
-        title: "Calendar",
-        url: "/calendar",
-        icon: Icons.Calendar,
         items: [],
       },
       {
-        title: "Profile",
-        url: "/profile",
-        icon: Icons.User,
+        title: "Analytics",
+        url: "/analytics",
+        icon: Icons.PieChart,
         items: [],
       },
       {
-        title: "Forms",
-        icon: Icons.Alphabet,
+        title: "Orders",
+        icon: Icons.ShoppingBagIcon,
         items: [
-          {
-            title: "Form Elements",
-            url: "/forms/form-elements",
-          },
-          {
-            title: "Form Layout",
-            url: "/forms/form-layout",
-          },
+          { title: "All Orders", url: "/orders" },
+          { title: "Unassigned Queue", url: "/orders/unassigned" },
         ],
       },
       {
-        title: "Tables",
-        url: "/tables",
+        title: "Catalog",
         icon: Icons.Table,
         items: [
-          {
-            title: "Tables",
-            url: "/tables",
-          },
+          { title: "Categories", url: "/catalog/categories" },
+          { title: "Subcategories", url: "/catalog/subcategories" },
+          { title: "Products", url: "/catalog/products" },
+          { title: "Inventory", url: "/catalog/inventory" },
         ],
       },
       {
-        title: "Pages",
-        icon: Icons.Alphabet,
+        title: "Shops",
+        icon: Icons.StoreIcon,
         items: [
-          {
-            title: "Settings",
-            url: "/pages/settings",
-          },
+          { title: "All Shops", url: "/shops" },
+          { title: "Onboarding Queue", url: "/shops/onboarding" },
         ],
+      },
+      {
+        title: "Delivery Partners",
+        icon: Icons.DeliveryIcon,
+        items: [
+          { title: "All Partners", url: "/delivery-partners" },
+          { title: "Verification Queue", url: "/delivery-partners/onboarding" },
+        ],
+      },
+      {
+        title: "Customers",
+        url: "/users",
+        icon: Icons.User,
+        items: [],
       },
     ],
   },
   {
-    label: "OTHERS",
+    label: "MARKETING & FINANCE",
     items: [
       {
-        title: "Charts",
-        icon: Icons.PieChart,
+        title: "Promotions",
+        icon: Icons.TagIcon,
         items: [
-          {
-            title: "Basic Chart",
-            url: "/charts/basic-chart",
-          },
+          { title: "Coupons", url: "/promotions/coupons" },
+          { title: "Banners", url: "/promotions/banners" },
+          { title: "Push Notifications", url: "/promotions/notifications" },
         ],
       },
       {
-        title: "UI Elements",
-        icon: Icons.FourCircle,
+        title: "Finance",
+        icon: Icons.DollarSignIcon,
         items: [
-          {
-            title: "Alerts",
-            url: "/ui-elements/alerts",
-          },
-          {
-            title: "Buttons",
-            url: "/ui-elements/buttons",
-          },
+          { title: "Payouts", url: "/finance/payouts" },
+          { title: "Commission Rules", url: "/finance/commission" },
+          { title: "Settlement Reports", url: "/finance/reports" },
+        ],
+      },
+      {
+        title: "Reviews",
+        url: "/reviews",
+        icon: Icons.StarIcon,
+        items: [],
+      },
+      {
+        title: "Support Tickets",
+        url: "/support",
+        icon: Icons.HelpCircleIcon,
+        items: [],
+      },
+    ],
+  },
+  {
+    label: "SYSTEM",
+    items: [
+      {
+        title: "Settings",
+        icon: Icons.SettingsIcon,
+        items: [
+          { title: "Admin Users & Roles", url: "/settings/admins" },
+          { title: "App Config", url: "/settings/config" },
+          { title: "Audit Log", url: "/settings/audit-log" },
         ],
       },
     ],
