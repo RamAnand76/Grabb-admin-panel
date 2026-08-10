@@ -12,11 +12,11 @@ import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | NextAdmin - Next.js Dashboard Kit",
-    default: "NextAdmin - Next.js Dashboard Kit",
+    template: "%s | Grabb Admin Panel",
+    default: "Grabb Admin Panel - Built By Rhevez Team",
   },
   description:
-    "Next.js admin dashboard toolkit with 200+ templates, UI components, and integrations for fast dashboard development.",
+    "Grabb client administration and fleet management portal. Designed and built by Rhevez Team.",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

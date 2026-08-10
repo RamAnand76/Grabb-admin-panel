@@ -65,9 +65,12 @@ export function Sidebar() {
               <Link
                 href={"/"}
                 onClick={() => isMobile && toggleSidebar()}
-                className="px-0 py-2.5 min-[850px]:py-0"
+                className="flex flex-col gap-0.5 px-0 py-2.5 min-[850px]:py-0"
               >
                 <Logo />
+                <span className="text-[10px] font-bold tracking-widest text-amber-500 uppercase ml-[3px] mt-0.5 select-none opacity-85">
+                  Admin
+                </span>
               </Link>
             )}
 
