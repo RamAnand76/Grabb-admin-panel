@@ -380,6 +380,9 @@
 }
 
 @layer base {
+  html {
+    font-size: 87.5%;
+  }
   body {
     @apply bg-gray-2 text-dark-5 dark:text-dark-6 dark:bg-[#020D1A];
   }

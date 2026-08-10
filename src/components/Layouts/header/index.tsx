@@ -13,52 +13,53 @@ export function Header() {
   const { toggleSidebar, isMobile } = useSidebarContext();
 
   return (
-    <header className="border-stroke shadow-1 dark:border-stroke-dark dark:bg-gray-dark sticky top-0 z-30 flex items-center justify-between border-b bg-white px-4 py-5 md:px-5 2xl:px-10">
-      <button
-        onClick={toggleSidebar}
-        className="dark:border-stroke-dark rounded-lg border px-1.5 py-1 lg:hidden dark:bg-[#020D1A] hover:dark:bg-[#FFFFFF1A]"
-      >
-        <MenuIcon />
-        <span className="sr-only">Toggle Sidebar</span>
-      </button>
+    <header className="sticky top-0 z-30 flex items-center justify-between bg-transparent px-4 py-6 md:px-5 2xl:px-10">
+      <div className="flex items-center gap-4">
+        {isMobile && (
+          <button
+            onClick={toggleSidebar}
+            className="dark:border-stroke-dark rounded-lg border px-1.5 py-1 dark:bg-[#020D1A] hover:dark:bg-[#FFFFFF1A]"
+          >
+            <MenuIcon />
+            <span className="sr-only">Toggle Sidebar</span>
+          </button>
+        )}
 
-      {isMobile && (
-        <Link href={"/"} className="2xsm:ml-4 ml-2 max-[430px]:hidden">
-          <Image
-            src={"/images/logo/logo-icon.svg"}
-            width={32}
-            height={32}
-            alt=""
-            role="presentation"
-          />
-        </Link>
-      )}
+        {isMobile && (
+          <Link href={"/"} className="max-[430px]:hidden">
+            <Image
+              src={"/images/logo/logo-icon.svg"}
+              width={32}
+              height={32}
+              alt=""
+              role="presentation"
+            />
+          </Link>
+        )}
 
-      <div className="max-xl:hidden">
-        <h1 className="text-heading-5 text-dark mb-0.5 font-bold dark:text-white">
-          Dashboard
-        </h1>
-        <p className="font-medium">Next.js Admin Dashboard Solution</p>
+        <div>
+          <p className="text-sm font-medium text-dark-4 dark:text-dark-6 mb-1">
+            Welcome back
+          </p>
+          <h1 className="text-heading-6 text-dark font-bold dark:text-white sm:text-heading-5">
+            Admin User
+          </h1>
+        </div>
       </div>
 
-      <div className="2xsm:gap-4 flex flex-1 items-center justify-end gap-2">
-        <div className="relative w-full max-w-75">
+      <div className="flex items-center gap-4 2xsm:gap-6">
+        <div className="relative hidden sm:block">
           <input
             type="search"
-            placeholder="Search"
-            className="bg-gray-2 focus-visible:border-primary dark:border-dark-3 dark:bg-dark-2 dark:hover:border-dark-4 dark:hover:bg-dark-3 dark:hover:text-dark-6 dark:focus-visible:border-primary flex w-full items-center gap-3.5 rounded-full border py-3 pr-5 pl-13.25 transition-colors outline-none"
+            placeholder="Search here..."
+            className="bg-gray-2 focus-visible:border-primary dark:border-dark-3 dark:bg-dark-2 dark:hover:border-dark-4 dark:hover:bg-dark-3 dark:hover:text-dark-6 flex w-60 items-center gap-3.5 rounded-full border-none py-3 pr-5 pl-11 transition-colors outline-none text-sm"
           />
-
-          <SearchIcon className="pointer-events-none absolute top-1/2 left-5 -translate-y-1/2 max-[1015px]:size-5" />
+          <SearchIcon className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 size-4 text-dark-4 dark:text-dark-6" />
         </div>
-
-        <ThemeToggleSwitch />
 
         <Notification />
-
-        <div className="shrink-0">
-          <UserInfo />
-        </div>
+        
+        <UserInfo />
       </div>
     </header>
   );

@@ -7,7 +7,7 @@ import "@/js/us-aea-en";
 
 export default function Map() {
   useEffect(() => {
-    new jsVectorMap({
+    const map = new jsVectorMap({
       selector: "#mapOne",
       map: "us_aea_en",
       zoomButtons: true,
@@ -37,11 +37,18 @@ export default function Map() {
         },
       },
     });
+
+    return () => {
+      const mapEl = document.getElementById("mapOne");
+      if (mapEl) {
+        mapEl.innerHTML = "";
+      }
+    };
   }, []);
 
   return (
-    <div className="h-[422px]">
-      <div id="mapOne" className="mapOne map-btn" />
+    <div className="h-[422px] w-full relative overflow-hidden rounded-lg">
+      <div id="mapOne" className="mapOne map-btn h-full w-full absolute inset-0" />
     </div>
   );
 }
