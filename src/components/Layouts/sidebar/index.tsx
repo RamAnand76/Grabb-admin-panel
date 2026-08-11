@@ -52,7 +52,7 @@ export function Sidebar() {
         className={cn(
           "flex-shrink-0 overflow-hidden bg-transparent transition-[width] duration-300 ease-in-out",
           isMobile ? "fixed bottom-0 top-0 z-50 w-[290px] bg-[#1C2434] dark:bg-[#0a0a0a]" : "sticky top-0 h-screen",
-          isCollapsed ? "w-[80px]" : "w-[220px]",
+          isCollapsed ? "w-[80px]" : "w-[250px]",
           isMobile && !isOpen && "w-0"
         )}
         aria-label="Main navigation"
@@ -65,10 +65,10 @@ export function Sidebar() {
               <Link
                 href={"/"}
                 onClick={() => isMobile && toggleSidebar()}
-                className="flex flex-col gap-0.5 px-0 py-2.5 min-[850px]:py-0"
+                className="flex flex-col items-center gap-1 px-0 py-2.5 min-[850px]:py-0 w-[180px]"
               >
                 <Logo />
-                <span className="text-[10px] font-bold tracking-widest text-amber-500 uppercase ml-[3px] mt-0.5 select-none opacity-85">
+                <span className="text-[10px] font-bold tracking-[0.25em] text-[#f59e0b] uppercase select-none opacity-90 text-center w-full">
                   Admin
                 </span>
               </Link>
@@ -178,7 +178,7 @@ export function Sidebar() {
                     <ThemeToggleSwitch />
                   </div>
                 ) : (
-                  <ThemeToggleSwitch />
+                  <ThemeToggleSwitch isCollapsed />
                 )}
               </div>
             </div>

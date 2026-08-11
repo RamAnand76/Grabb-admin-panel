@@ -14,7 +14,7 @@ const THEMES = [
   },
 ];
 
-export function ThemeToggleSwitch() {
+export function ThemeToggleSwitch({ isCollapsed }: { isCollapsed?: boolean }) {
   const { setTheme, theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -24,6 +24,19 @@ export function ThemeToggleSwitch() {
 
   if (!mounted) {
     return null;
+  }
+
+  if (isCollapsed) {
+    const ActiveIcon = theme === "dark" ? Moon : Sun;
+    return (
+      <button
+        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        className="group cursor-pointer rounded-full p-2.5 text-gray-400 hover:text-white hover:bg-white/10 outline-0 transition-colors"
+      >
+        <span className="sr-only">Switch mode</span>
+        <ActiveIcon className="size-6 shrink-0" />
+      </button>
+    );
   }
 
   return (

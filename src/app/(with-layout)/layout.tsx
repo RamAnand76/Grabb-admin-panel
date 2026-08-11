@@ -8,7 +8,7 @@ export default function WithLayout({ children }: PropsWithChildren) {
       <Sidebar />
 
       <div className="flex flex-1 flex-col p-3 pl-0 lg:p-4 lg:pl-0">
-        <div className="flex flex-1 flex-col rounded-2xl bg-gray-2 dark:bg-[#020d1a] overflow-hidden">
+        <div className="flex flex-1 flex-col rounded-2xl bg-gray-2 dark:bg-[#161f30] overflow-hidden">
           <Header />
 
           <main className="isolate mx-auto w-full max-w-(--breakpoint-2xl) flex-1 overflow-y-auto p-4 md:p-6 2xl:p-10">
