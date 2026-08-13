@@ -25,13 +25,14 @@ export default function UserDetailPage({ params }: PageProps) {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3">
-            <Link href="/users" className="text-xs font-semibold text-dark-4 hover:text-dark dark:text-dark-6 dark:hover:text-white">
+          <div className="flex flex-col gap-2">
+            <Link href="/users" className="text-xs font-semibold text-dark-4 hover:text-dark dark:text-dark-6 dark:hover:text-white w-fit">
               ← Back to Customer Directory
             </Link>
-            <span className="text-dark-4 dark:text-dark-6">•</span>
-            <h1 className="text-2xl font-bold text-dark dark:text-white">Aarav Sharma</h1>
-            <StatusBadge status={status} />
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-dark dark:text-white">Aarav Sharma</h1>
+              <StatusBadge status={status} />
+            </div>
           </div>
           <p className="text-sm text-dark-4 dark:text-dark-6 mt-1">
             Customer ID: {id} • Phone: <span className="font-semibold text-dark dark:text-white">+91 98765 43210</span> • Joined: Jan 12, 2026

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { StatusBadge } from "@/components/common/status-badge";
+import { TableActionsDropdown } from "@/components/common/table-actions-dropdown";
 
 interface AdminUser {
   id: string;
@@ -75,6 +76,7 @@ export default function AdminsPage() {
                 <th className="p-3">Assigned Role</th>
                 <th className="p-3">Status</th>
                 <th className="p-3">Last Login</th>
+                <th className="p-3 text-right">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-stroke dark:divide-stroke-dark">
@@ -87,6 +89,22 @@ export default function AdminsPage() {
                     <StatusBadge status={a.status} />
                   </td>
                   <td className="p-3 text-xs text-dark-4 dark:text-dark-6">{a.lastLogin}</td>
+                  <td className="p-3 text-right" onClick={(e) => e.stopPropagation()}>
+                    <TableActionsDropdown
+                      actions={[
+                        {
+                          label: "Edit Admin",
+                          onClick: () => alert(`Editing admin: ${a.name}...`),
+                          variant: "primary",
+                        },
+                        {
+                          label: "Revoke Access",
+                          onClick: () => alert(`Revoking access for: ${a.name}...`),
+                          variant: "danger",
+                        },
+                      ]}
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>

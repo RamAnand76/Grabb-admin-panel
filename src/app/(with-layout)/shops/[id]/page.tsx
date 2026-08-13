@@ -33,13 +33,14 @@ export default function ShopDetailPage({ params }: PageProps) {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3">
-            <Link href="/shops" className="text-xs font-semibold text-dark-4 hover:text-dark dark:text-dark-6 dark:hover:text-white">
+          <div className="flex flex-col gap-2">
+            <Link href="/shops" className="text-xs font-semibold text-dark-4 hover:text-dark dark:text-dark-6 dark:hover:text-white w-fit">
               ← Back to Shops List
             </Link>
-            <span className="text-dark-4 dark:text-dark-6">•</span>
-            <h1 className="text-2xl font-bold text-dark dark:text-white">{shopName}</h1>
-            <StatusBadge status={status} />
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-dark dark:text-white">{shopName}</h1>
+              <StatusBadge status={status} />
+            </div>
           </div>
           <p className="text-sm text-dark-4 dark:text-dark-6 mt-1">
             Shop ID: {id} • Owner: <span className="font-semibold text-dark dark:text-white">{ownerName}</span> ({phone})

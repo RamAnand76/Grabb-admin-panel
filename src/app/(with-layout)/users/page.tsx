@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FilterBar } from "@/components/common/filter-bar";
 import { StatusBadge } from "@/components/common/status-badge";
 import { ConfirmModal } from "@/components/common/confirm-modal";
+import { TableActionsDropdown } from "@/components/common/table-actions-dropdown";
 
 interface UserCustomer {
   id: string;
@@ -99,23 +100,25 @@ export default function UsersPage() {
                   <td className="p-3">
                     <StatusBadge status={u.status === "active" ? "active" : "inactive"} />
                   </td>
-                  <td className="p-3 text-right space-x-2">
-                    <Link
-                      href={`/users/${u.id}`}
-                      className="rounded-lg bg-gray-2 px-3 py-1.5 text-xs font-semibold text-dark hover:bg-gray-3 dark:bg-dark-2 dark:text-white"
-                    >
-                      View Profile
-                    </Link>
-                    <button
-                      onClick={() => setBlockTargetId(u.id)}
-                      className={`rounded-lg px-3 py-1.5 text-xs font-semibold ${
-                        u.status === "active"
-                          ? "bg-rose-50 text-rose-600 hover:bg-rose-100 dark:bg-rose-950/40 dark:text-rose-400"
-                          : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-400"
-                      }`}
-                    >
-                      {u.status === "active" ? "Block" : "Unblock"}
-                    </button>
+                  <td className="p-3 text-right" onClick={(e) => e.stopPropagation()}>
+                    <TableActionsDropdown
+                      actions={[
+                        {
+                          label: "View Profile",
+                          onClick: () => window.location.href = `/users/${u.id}`,
+                          variant: "primary",
+                        },
+                        {
+                          label: "Edit User",
+                          onClick: () => alert(`Editing user: ${u.name}...`),
+                        },
+                        {
+                          label: u.status === "active" ? "Block" : "Unblock",
+                          onClick: () => setBlockTargetId(u.id),
+                          variant: u.status === "active" ? "danger" : "default",
+                        },
+                      ]}
+                    />
                   </td>
                 </tr>
               ))}

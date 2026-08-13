@@ -80,6 +80,14 @@ export const NAV_DATA = [
         ],
       },
       {
+        title: "Subscriptions",
+        icon: Icons.StarIcon,
+        items: [
+          { title: "Subscription Plans", url: "/subscriptions/plans" },
+          { title: "Active Subscriptions", url: "/subscriptions/active" },
+        ],
+      },
+      {
         title: "Reviews",
         url: "/reviews",
         icon: Icons.StarIcon,

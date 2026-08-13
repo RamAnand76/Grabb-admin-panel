@@ -3,6 +3,7 @@
 import { SearchIcon } from "@/assets/icons";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSidebarContext } from "../sidebar/sidebar-context";
 import { MenuIcon } from "./icons";
 import { Notification } from "./notification";
@@ -11,6 +12,8 @@ import { UserInfo } from "./user-info";
 
 export function Header() {
   const { toggleSidebar, isMobile } = useSidebarContext();
+  const pathname = usePathname();
+  const isDashboard = pathname === "/";
 
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between bg-transparent px-4 py-6 md:px-5 2xl:px-10">
@@ -37,14 +40,16 @@ export function Header() {
           </Link>
         )}
 
-        <div>
-          <p className="text-sm font-medium text-dark-4 dark:text-dark-6 mb-1">
-            Welcome back
-          </p>
-          <h1 className="text-heading-6 text-dark font-bold dark:text-white sm:text-heading-5">
-            Admin User
-          </h1>
-        </div>
+        {isDashboard && (
+          <div>
+            <p className="text-sm font-medium text-dark-4 dark:text-dark-6 mb-1">
+              Welcome back
+            </p>
+            <h1 className="text-heading-6 text-dark font-bold dark:text-white sm:text-heading-5">
+              Admin User
+            </h1>
+          </div>
+        )}
       </div>
 
       <div className="flex items-center gap-4 2xsm:gap-6">

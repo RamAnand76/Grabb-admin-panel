@@ -6,6 +6,7 @@ import { FilterBar } from "@/components/common/filter-bar";
 import { StatusBadge } from "@/components/common/status-badge";
 import { TrashTabWrapper } from "@/components/common/trash-tab-wrapper";
 import { ConfirmModal } from "@/components/common/confirm-modal";
+import { TableActionsDropdown } from "@/components/common/table-actions-dropdown";
 
 interface Shop {
   id: string;
@@ -163,30 +164,31 @@ export default function ShopsPage() {
                     <td className="p-3">
                       <StatusBadge status={s.status} />
                     </td>
-                    <td className="p-3 text-right space-x-2">
-                      {tab === "active" ? (
-                        <>
-                          <Link
-                            href={`/shops/${s.id}`}
-                            className="rounded-lg bg-gray-2 px-3 py-1.5 text-xs font-semibold text-dark hover:bg-gray-3 dark:bg-dark-2 dark:text-white"
-                          >
-                            Edit
-                          </Link>
-                          <button
-                            onClick={() => setDeleteTargetId(s.id)}
-                            className="rounded-lg bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-600 hover:bg-rose-100 dark:bg-rose-950/40 dark:text-rose-400"
-                          >
-                            Delete
-                          </button>
-                        </>
-                      ) : (
-                        <button
-                          onClick={() => handleRestore(s.id)}
-                          className="rounded-lg bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-600 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-400"
-                        >
-                          Restore
-                        </button>
-                      )}
+                    <td className="p-3 text-right" onClick={(e) => e.stopPropagation()}>
+                      <TableActionsDropdown
+                        actions={
+                          tab === "active"
+                            ? [
+                                {
+                                  label: "Edit Shop",
+                                  onClick: () => window.location.href = `/shops/${s.id}`,
+                                  variant: "primary",
+                                },
+                                {
+                                  label: "Delete",
+                                  onClick: () => setDeleteTargetId(s.id),
+                                  variant: "danger",
+                                },
+                              ]
+                            : [
+                                {
+                                  label: "Restore Shop",
+                                  onClick: () => handleRestore(s.id),
+                                  variant: "primary",
+                                },
+                              ]
+                        }
+                      />
                     </td>
                   </tr>
                 ))}

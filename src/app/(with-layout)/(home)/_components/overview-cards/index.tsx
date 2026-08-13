@@ -6,60 +6,66 @@ export async function OverviewCardsGroup() {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 sm:gap-6 2xl:gap-7.5">
       <OverviewCard
-        label="Today's Orders"
+        label="Monthly Subscription Rev"
         data={{
-          value: "142",
-          growthRate: 12.5,
-        }}
-        Icon={icons.Views}
-      />
-
-      <OverviewCard
-        label="Today's Revenue"
-        data={{
-          value: "$4,820",
-          growthRate: 8.3,
+          value: "$12,450",
+          growthRate: 14.2,
         }}
         Icon={icons.Profit}
       />
 
-      <Link href="/orders?status=pending" className="block transition-transform hover:scale-[1.02]">
+      <Link href="/subscriptions/active" className="block transition-transform hover:scale-[1.02]">
         <OverviewCard
-          label="Pending Orders"
+          label="Active Premium Shops"
           data={{
-            value: "18",
-            growthRate: -2.1,
+            value: "185",
+            growthRate: 8.5,
+          }}
+          Icon={icons.Views}
+        />
+      </Link>
+
+      <Link href="/shops/onboarding" className="block transition-transform hover:scale-[1.02]">
+        <OverviewCard
+          label="Pending Shops"
+          data={{
+            value: "14",
+            growthRate: -2.4,
           }}
           Icon={icons.Product}
         />
       </Link>
 
-      <OverviewCard
-        label="Active Partners"
-        data={{
-          value: "34/45",
-          growthRate: 5.0,
-        }}
-        Icon={icons.Users}
-      />
-
-      <OverviewCard
-        label="New Users Today"
-        data={{
-          value: "56",
-          growthRate: 15.2,
-        }}
-        Icon={icons.Users}
-      />
-
-      <Link href="/catalog/inventory?status=low" className="block transition-transform hover:scale-[1.02]">
+      <Link href="/delivery-partners" className="block transition-transform hover:scale-[1.02]">
         <OverviewCard
-          label="Low Stock Items"
+          label="Active Delivery Drivers"
           data={{
-            value: "12",
-            growthRate: -4.5,
+            value: "42/50",
+            growthRate: 5.0,
+          }}
+          Icon={icons.Users}
+        />
+      </Link>
+
+      <Link href="/orders/unassigned" className="block transition-transform hover:scale-[1.02]">
+        <OverviewCard
+          label="Unassigned Orders"
+          data={{
+            value: "8",
+            growthRate: -15.0,
           }}
           Icon={icons.Product}
+        />
+      </Link>
+
+      <Link href="/support" className="block transition-transform hover:scale-[1.02]">
+        <OverviewCard
+          label="Open Support Tickets"
+          data={{
+            value: "5",
+            growthRate: -10.0,
+          }}
+          Icon={icons.Users}
         />
       </Link>
     </div>

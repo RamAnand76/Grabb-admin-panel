@@ -23,13 +23,14 @@ export default function PartnerDetailPage({ params }: PageProps) {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3">
-            <Link href="/delivery-partners" className="text-xs font-semibold text-dark-4 hover:text-dark dark:text-dark-6 dark:hover:text-white">
+          <div className="flex flex-col gap-2">
+            <Link href="/delivery-partners" className="text-xs font-semibold text-dark-4 hover:text-dark dark:text-dark-6 dark:hover:text-white w-fit">
               ← Back to Delivery Partners
             </Link>
-            <span className="text-dark-4 dark:text-dark-6">•</span>
-            <h1 className="text-2xl font-bold text-dark dark:text-white">Rahul Sharma</h1>
-            <StatusBadge status="online" />
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-dark dark:text-white">Rahul Sharma</h1>
+              <StatusBadge status="online" />
+            </div>
           </div>
           <p className="text-sm text-dark-4 dark:text-dark-6 mt-1">
             Partner ID: {id} • Phone: <span className="font-semibold text-dark dark:text-white">+91 98111 22334</span> • Vehicle: Motorcycle

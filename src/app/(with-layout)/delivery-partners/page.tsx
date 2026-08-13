@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { FilterBar } from "@/components/common/filter-bar";
 import { StatusBadge } from "@/components/common/status-badge";
+import { TableActionsDropdown } from "@/components/common/table-actions-dropdown";
 
 interface DeliveryPartner {
   id: string;
@@ -142,13 +143,20 @@ export default function DeliveryPartnersPage() {
                   <td className="p-3">
                     <StatusBadge status={p.verificationStatus} />
                   </td>
-                  <td className="p-3 text-right">
-                    <Link
-                      href={`/delivery-partners/${p.id}`}
-                      className="rounded-lg bg-gray-2 px-3 py-1.5 text-xs font-semibold text-dark hover:bg-gray-3 dark:bg-dark-2 dark:text-white"
-                    >
-                      View Profile
-                    </Link>
+                  <td className="p-3 text-right" onClick={(e) => e.stopPropagation()}>
+                    <TableActionsDropdown
+                      actions={[
+                        {
+                          label: "View Profile",
+                          onClick: () => window.location.href = `/delivery-partners/${p.id}`,
+                          variant: "primary",
+                        },
+                        {
+                          label: "Edit Partner",
+                          onClick: () => alert(`Editing partner: ${p.name}...`),
+                        },
+                      ]}
+                    />
                   </td>
                 </tr>
               ))}

@@ -32,16 +32,17 @@ export default function OrderDetailPage({ params }: PageProps) {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-2">
             <Link
               href="/orders"
-              className="text-xs font-semibold text-dark-4 hover:text-dark dark:text-dark-6 dark:hover:text-white"
+              className="text-xs font-semibold text-dark-4 hover:text-dark dark:text-dark-6 dark:hover:text-white w-fit"
             >
               ← Back to Orders
             </Link>
-            <span className="text-dark-4 dark:text-dark-6">•</span>
-            <h1 className="text-2xl font-bold text-dark dark:text-white">{id}</h1>
-            <StatusBadge status={orderStatus} />
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-dark dark:text-white">{id}</h1>
+              <StatusBadge status={orderStatus} />
+            </div>
           </div>
           <p className="text-sm text-dark-4 dark:text-dark-6 mt-1">
             Placed on August 10, 2026 at 10:14 AM • Shop:{" "}

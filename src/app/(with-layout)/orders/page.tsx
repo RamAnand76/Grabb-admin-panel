@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FilterBar } from "@/components/common/filter-bar";
 import { StatusBadge } from "@/components/common/status-badge";
 import { ConfirmModal } from "@/components/common/confirm-modal";
+import { TableActionsDropdown } from "@/components/common/table-actions-dropdown";
 
 interface OrderItem {
   id: string;
@@ -261,13 +262,20 @@ export default function OrdersPage() {
                     )}
                   </td>
                   <td className="p-3 text-xs text-dark-4 dark:text-dark-6">{o.placedTime}</td>
-                  <td className="p-3 text-right">
-                    <Link
-                      href={`/orders/${o.id}`}
-                      className="rounded-lg bg-gray-2 px-3 py-1.5 text-xs font-semibold text-dark hover:bg-gray-3 dark:bg-dark-2 dark:text-white dark:hover:bg-dark-3"
-                    >
-                      View Detail
-                    </Link>
+                  <td className="p-3 text-right" onClick={(e) => e.stopPropagation()}>
+                    <TableActionsDropdown
+                      actions={[
+                        {
+                          label: "View Detail",
+                          onClick: () => window.location.href = `/orders/${o.id}`,
+                          variant: "primary",
+                        },
+                        {
+                          label: "Edit Order",
+                          onClick: () => alert(`Editing Order #${o.id}...`),
+                        },
+                      ]}
+                    />
                   </td>
                 </tr>
               ))}

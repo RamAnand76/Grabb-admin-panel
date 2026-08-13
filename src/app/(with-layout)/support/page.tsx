@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { StatusBadge } from "@/components/common/status-badge";
+import { TableActionsDropdown } from "@/components/common/table-actions-dropdown";
 import { FilterBar } from "@/components/common/filter-bar";
 
 interface SupportTicket {
@@ -108,13 +109,20 @@ export default function SupportPage() {
                     <StatusBadge status={t.status} />
                   </td>
                   <td className="p-3 text-xs text-dark-4 dark:text-dark-6">{t.createdDate}</td>
-                  <td className="p-3 text-right">
-                    <Link
-                      href={`/support/${t.id}`}
-                      className="rounded-lg bg-gray-2 px-3 py-1.5 text-xs font-semibold text-dark hover:bg-gray-3 dark:bg-dark-2 dark:text-white"
-                    >
-                      Open Thread
-                    </Link>
+                  <td className="p-3 text-right" onClick={(e) => e.stopPropagation()}>
+                    <TableActionsDropdown
+                      actions={[
+                        {
+                          label: "Open Thread",
+                          onClick: () => window.location.href = `/support/${t.id}`,
+                          variant: "primary",
+                        },
+                        {
+                          label: "Edit Ticket",
+                          onClick: () => alert(`Editing ticket: ${t.id}...`),
+                        },
+                      ]}
+                    />
                   </td>
                 </tr>
               ))}

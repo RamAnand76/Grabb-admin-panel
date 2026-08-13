@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { StatusBadge } from "@/components/common/status-badge";
 import { ConfirmModal } from "@/components/common/confirm-modal";
+import { TableActionsDropdown } from "@/components/common/table-actions-dropdown";
 
 interface PayoutRecord {
   id: string;
@@ -95,17 +96,24 @@ export default function PayoutsPage() {
                   <td className="p-3">
                     <StatusBadge status={p.status} />
                   </td>
-                  <td className="p-3 text-right">
-                    {p.status === "pending" ? (
-                      <button
-                        onClick={() => setConfirmTargetId(p.id)}
-                        className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-700"
-                      >
-                        Mark as Paid ✓
-                      </button>
-                    ) : (
-                      <span className="text-xs text-dark-4 font-medium">Settled</span>
-                    )}
+                  <td className="p-3 text-right" onClick={(e) => e.stopPropagation()}>
+                    <TableActionsDropdown
+                      actions={[
+                        ...(p.status === "pending"
+                          ? [
+                              {
+                                label: "Mark as Paid",
+                                onClick: () => setConfirmTargetId(p.id),
+                                variant: "primary" as const,
+                              },
+                            ]
+                          : []),
+                        {
+                          label: "View Report",
+                          onClick: () => alert(`Viewing payout report for: ${p.recipientName}...`),
+                        },
+                      ]}
+                    />
                   </td>
                 </tr>
               ))}
