@@ -139,6 +139,12 @@ export const NAV_DATA = [
           { title: "Audit Log", url: "/settings/audit-log" },
         ],
       },
+      {
+        title: "Help & Instructions",
+        url: "/help",
+        icon: Icons.HelpCircleIcon,
+        items: [],
+      },
     ],
   },
 ];
