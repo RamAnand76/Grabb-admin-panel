@@ -31,6 +31,7 @@ export const NAV_DATA = [
           { title: "Categories", url: "/catalog/categories" },
           { title: "Subcategories", url: "/catalog/subcategories" },
           { title: "Products", url: "/catalog/products" },
+          { title: "Master Mapping", url: "/catalog/master-mapping" },
           { title: "Inventory", url: "/catalog/inventory" },
         ],
       },
@@ -54,6 +55,29 @@ export const NAV_DATA = [
         title: "Customers",
         url: "/users",
         icon: Icons.User,
+        items: [],
+      },
+    ],
+  },
+  {
+    label: "LIVE OPERATIONS",
+    items: [
+      {
+        title: "Operational Zones",
+        url: "/zones",
+        icon: Icons.MapIcon,
+        items: [],
+      },
+      {
+        title: "Live Fleet Map",
+        url: "/delivery-partners/live-map",
+        icon: Icons.MapIcon,
+        items: [],
+      },
+      {
+        title: "Surge Pricing",
+        url: "/finance/surge",
+        icon: Icons.DollarSignIcon,
         items: [],
       },
     ],
@@ -94,10 +118,12 @@ export const NAV_DATA = [
         items: [],
       },
       {
-        title: "Support Tickets",
-        url: "/support",
+        title: "Support & Disputes",
         icon: Icons.HelpCircleIcon,
-        items: [],
+        items: [
+          { title: "Support Tickets", url: "/support" },
+          { title: "Disputes & Refunds", url: "/support/disputes" },
+        ],
       },
     ],
   },

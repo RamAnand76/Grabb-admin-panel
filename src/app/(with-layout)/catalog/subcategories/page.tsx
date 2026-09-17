@@ -10,6 +10,7 @@ interface Subcategory {
   name: string;
   parentCategory: string;
   productsCount: number;
+  image?: string;
   isDeleted?: boolean;
 }
 
@@ -18,17 +19,18 @@ export default function SubcategoriesPage() {
   const [selectedParentFilter, setSelectedParentFilter] = useState("all");
 
   const [subcategories, setSubcategories] = useState<Subcategory[]>([
-    { id: "sc1", name: "Leafy Greens", parentCategory: "Fresh Vegetables", productsCount: 32 },
-    { id: "sc2", name: "Root Vegetables", parentCategory: "Fresh Vegetables", productsCount: 45 },
-    { id: "sc3", name: "Citrus Fruits", parentCategory: "Fresh Fruits", productsCount: 28 },
-    { id: "sc4", name: "Berries & Cherries", parentCategory: "Fresh Fruits", productsCount: 19 },
-    { id: "sc5", name: "Cheese & Butter", parentCategory: "Dairy & Eggs", productsCount: 42 },
-    { id: "sc6", name: "Exotic Spices", parentCategory: "Fresh Vegetables", productsCount: 12, isDeleted: true },
+    { id: "sc1", name: "Leafy Greens", parentCategory: "Fresh Vegetables", productsCount: 32, image: "https://via.placeholder.com/150" },
+    { id: "sc2", name: "Root Vegetables", parentCategory: "Fresh Vegetables", productsCount: 45, image: "https://via.placeholder.com/150" },
+    { id: "sc3", name: "Citrus Fruits", parentCategory: "Fresh Fruits", productsCount: 28, image: "https://via.placeholder.com/150" },
+    { id: "sc4", name: "Berries & Cherries", parentCategory: "Fresh Fruits", productsCount: 19, image: "https://via.placeholder.com/150" },
+    { id: "sc5", name: "Cheese & Butter", parentCategory: "Dairy & Eggs", productsCount: 42, image: "https://via.placeholder.com/150" },
+    { id: "sc6", name: "Exotic Spices", parentCategory: "Fresh Vegetables", productsCount: 12, isDeleted: true, image: "https://via.placeholder.com/150" },
   ]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editingSub, setEditingSub] = useState<Subcategory | null>(null);
   const [formName, setFormName] = useState("");
+  const [formImage, setFormImage] = useState("");
   const [formParent, setFormParent] = useState("Fresh Vegetables");
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
 
@@ -46,7 +48,7 @@ export default function SubcategoriesPage() {
       setSubcategories((prev) =>
         prev.map((sc) =>
           sc.id === editingSub.id
-            ? { ...sc, name: formName, parentCategory: formParent }
+            ? { ...sc, name: formName, parentCategory: formParent, image: formImage }
             : sc
         )
       );
@@ -58,11 +60,13 @@ export default function SubcategoriesPage() {
           name: formName,
           parentCategory: formParent,
           productsCount: 0,
+          image: formImage,
         },
       ]);
     }
     setModalOpen(false);
     setFormName("");
+    setFormImage("");
     setEditingSub(null);
   };
 
@@ -87,6 +91,7 @@ export default function SubcategoriesPage() {
           onClick={() => {
             setEditingSub(null);
             setFormName("");
+            setFormImage("");
             setModalOpen(true);
           }}
           className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-1 hover:bg-primary/90 transition-colors self-start sm:self-auto"
@@ -120,9 +125,10 @@ export default function SubcategoriesPage() {
       >
         <div className="rounded-2xl bg-white p-6 shadow-1 dark:bg-gray-dark border border-stroke dark:border-stroke-dark overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-dark dark:text-white">
+            <table className="w-full text-left text-sm text-dark dark:text-white whitespace-nowrap">
               <thead className="bg-gray-2 text-xs font-semibold uppercase text-dark-4 dark:bg-dark-2 dark:text-dark-6">
                 <tr>
+                  <th className="p-3">Image</th>
                   <th className="p-3">Subcategory Name</th>
                   <th className="p-3">Parent Category</th>
                   <th className="p-3">Linked Products</th>
@@ -132,6 +138,15 @@ export default function SubcategoriesPage() {
               <tbody className="divide-y divide-stroke dark:divide-stroke-dark">
                 {filteredSubs.map((sc) => (
                   <tr key={sc.id} className="hover:bg-gray-2 dark:hover:bg-dark-2">
+                    <td className="p-3">
+                      <div className="h-10 w-10 overflow-hidden rounded-lg border border-stroke dark:border-stroke-dark bg-gray-2 dark:bg-dark-2">
+                        {sc.image ? (
+                          <img src={sc.image} alt={sc.name} className="h-full w-full object-cover" />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center text-xs text-dark-4 dark:text-dark-6">N/A</div>
+                        )}
+                      </div>
+                    </td>
                     <td className="p-3 font-bold">{sc.name}</td>
                     <td className="p-3 font-medium text-primary">{sc.parentCategory}</td>
                     <td className="p-3">{sc.productsCount} products</td>
@@ -146,6 +161,7 @@ export default function SubcategoriesPage() {
                                     setEditingSub(sc);
                                     setFormName(sc.name);
                                     setFormParent(sc.parentCategory);
+                                    setFormImage(sc.image || "");
                                     setModalOpen(true);
                                   },
                                   variant: "primary",
@@ -208,6 +224,18 @@ export default function SubcategoriesPage() {
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
                   placeholder="e.g. Spinach & Microgreens"
+                  className="w-full rounded-lg border border-stroke bg-gray-2 p-3 text-sm text-dark outline-none focus:border-primary dark:border-stroke-dark dark:bg-dark-2 dark:text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-dark dark:text-white mb-1">
+                  Image URL
+                </label>
+                <input
+                  type="text"
+                  value={formImage}
+                  onChange={(e) => setFormImage(e.target.value)}
+                  placeholder="https://example.com/image.jpg"
                   className="w-full rounded-lg border border-stroke bg-gray-2 p-3 text-sm text-dark outline-none focus:border-primary dark:border-stroke-dark dark:bg-dark-2 dark:text-white"
                 />
               </div>

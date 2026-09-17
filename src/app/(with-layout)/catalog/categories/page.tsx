@@ -11,23 +11,25 @@ interface Category {
   subcategoriesCount: number;
   productsCount: number;
   status: "active" | "inactive";
+  image?: string;
   isDeleted?: boolean;
 }
 
 export default function CategoriesPage() {
   const [tab, setTab] = useState<"active" | "trash">("active");
   const [categories, setCategories] = useState<Category[]>([
-    { id: "c1", name: "Fresh Vegetables", subcategoriesCount: 8, productsCount: 142, status: "active" },
-    { id: "c2", name: "Fresh Fruits", subcategoriesCount: 6, productsCount: 98, status: "active" },
-    { id: "c3", name: "Dairy & Eggs", subcategoriesCount: 5, productsCount: 76, status: "active" },
-    { id: "c4", name: "Bakery & Bread", subcategoriesCount: 4, productsCount: 52, status: "active" },
-    { id: "c5", name: "Beverages & Juices", subcategoriesCount: 7, productsCount: 110, status: "inactive" },
-    { id: "c6", name: "Seasonal Exotic Goods", subcategoriesCount: 2, productsCount: 15, status: "active", isDeleted: true },
+    { id: "c1", name: "Fresh Vegetables", subcategoriesCount: 8, productsCount: 142, status: "active", image: "https://via.placeholder.com/150" },
+    { id: "c2", name: "Fresh Fruits", subcategoriesCount: 6, productsCount: 98, status: "active", image: "https://via.placeholder.com/150" },
+    { id: "c3", name: "Dairy & Eggs", subcategoriesCount: 5, productsCount: 76, status: "active", image: "https://via.placeholder.com/150" },
+    { id: "c4", name: "Bakery & Bread", subcategoriesCount: 4, productsCount: 52, status: "active", image: "https://via.placeholder.com/150" },
+    { id: "c5", name: "Beverages & Juices", subcategoriesCount: 7, productsCount: 110, status: "inactive", image: "https://via.placeholder.com/150" },
+    { id: "c6", name: "Seasonal Exotic Goods", subcategoriesCount: 2, productsCount: 15, status: "active", isDeleted: true, image: "https://via.placeholder.com/150" },
   ]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [formName, setFormName] = useState("");
+  const [formImage, setFormImage] = useState("");
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
 
   const activeCategories = categories.filter((c) => !c.isDeleted);
@@ -37,7 +39,7 @@ export default function CategoriesPage() {
     if (!formName.trim()) return;
     if (editingCategory) {
       setCategories((prev) =>
-        prev.map((c) => (c.id === editingCategory.id ? { ...c, name: formName } : c))
+        prev.map((c) => (c.id === editingCategory.id ? { ...c, name: formName, image: formImage } : c))
       );
     } else {
       setCategories((prev) => [
@@ -48,11 +50,13 @@ export default function CategoriesPage() {
           subcategoriesCount: 0,
           productsCount: 0,
           status: "active",
+          image: formImage,
         },
       ]);
     }
     setModalOpen(false);
     setFormName("");
+    setFormImage("");
     setEditingCategory(null);
   };
 
@@ -85,6 +89,7 @@ export default function CategoriesPage() {
           onClick={() => {
             setEditingCategory(null);
             setFormName("");
+            setFormImage("");
             setModalOpen(true);
           }}
           className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-1 hover:bg-primary/90 transition-colors self-start sm:self-auto"
@@ -101,9 +106,10 @@ export default function CategoriesPage() {
       >
         <div className="rounded-2xl bg-white p-6 shadow-1 dark:bg-gray-dark border border-stroke dark:border-stroke-dark overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-dark dark:text-white">
+            <table className="w-full text-left text-sm text-dark dark:text-white whitespace-nowrap">
               <thead className="bg-gray-2 text-xs font-semibold uppercase text-dark-4 dark:bg-dark-2 dark:text-dark-6">
                 <tr>
+                  <th className="p-3">Image</th>
                   <th className="p-3">Category Name</th>
                   <th className="p-3">Subcategories</th>
                   <th className="p-3">Total Products</th>
@@ -114,6 +120,15 @@ export default function CategoriesPage() {
               <tbody className="divide-y divide-stroke dark:divide-stroke-dark">
                 {(tab === "active" ? activeCategories : trashCategories).map((cat) => (
                   <tr key={cat.id} className="hover:bg-gray-2 dark:hover:bg-dark-2">
+                    <td className="p-3">
+                      <div className="h-10 w-10 overflow-hidden rounded-lg border border-stroke dark:border-stroke-dark bg-gray-2 dark:bg-dark-2">
+                        {cat.image ? (
+                          <img src={cat.image} alt={cat.name} className="h-full w-full object-cover" />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center text-xs text-dark-4 dark:text-dark-6">N/A</div>
+                        )}
+                      </div>
+                    </td>
                     <td className="p-3 font-bold">{cat.name}</td>
                     <td className="p-3">{cat.subcategoriesCount} subcategories</td>
                     <td className="p-3">{cat.productsCount} products</td>
@@ -139,6 +154,7 @@ export default function CategoriesPage() {
                                   onClick: () => {
                                     setEditingCategory(cat);
                                     setFormName(cat.name);
+                                    setFormImage(cat.image || "");
                                     setModalOpen(true);
                                   },
                                   variant: "primary",
@@ -184,6 +200,18 @@ export default function CategoriesPage() {
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
                   placeholder="e.g. Organic Produce"
+                  className="w-full rounded-lg border border-stroke bg-gray-2 p-3 text-sm text-dark outline-none focus:border-primary dark:border-stroke-dark dark:bg-dark-2 dark:text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-dark dark:text-white mb-1">
+                  Image URL
+                </label>
+                <input
+                  type="text"
+                  value={formImage}
+                  onChange={(e) => setFormImage(e.target.value)}
+                  placeholder="https://example.com/image.jpg"
                   className="w-full rounded-lg border border-stroke bg-gray-2 p-3 text-sm text-dark outline-none focus:border-primary dark:border-stroke-dark dark:bg-dark-2 dark:text-white"
                 />
               </div>

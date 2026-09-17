@@ -120,7 +120,7 @@ export default function OrderDetailPage({ params }: PageProps) {
           <div className="rounded-2xl bg-white p-6 shadow-1 dark:bg-gray-dark border border-stroke dark:border-stroke-dark">
             <h3 className="text-base font-bold text-dark dark:text-white mb-4">Itemized Products (4)</h3>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-dark dark:text-white">
+              <table className="w-full text-left text-sm text-dark dark:text-white whitespace-nowrap">
                 <thead className="bg-gray-2 text-xs font-semibold uppercase text-dark-4 dark:bg-dark-2 dark:text-dark-6">
                   <tr>
                     <th className="p-3">Product</th>

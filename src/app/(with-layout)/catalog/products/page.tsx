@@ -15,6 +15,7 @@ interface Product {
   stockStatus: "in-stock" | "low" | "out";
   status: "active" | "inactive";
   shopsCount: number;
+  image?: string;
   isDeleted?: boolean;
 }
 
@@ -34,6 +35,7 @@ export default function ProductsPage() {
       stockStatus: "in-stock",
       status: "active",
       shopsCount: 3,
+      image: "https://via.placeholder.com/150",
     },
     {
       id: "p2",
@@ -44,6 +46,7 @@ export default function ProductsPage() {
       stockStatus: "low",
       status: "active",
       shopsCount: 2,
+      image: "https://via.placeholder.com/150",
     },
     {
       id: "p3",
@@ -54,6 +57,7 @@ export default function ProductsPage() {
       stockStatus: "out",
       status: "active",
       shopsCount: 3,
+      image: "https://via.placeholder.com/150",
     },
     {
       id: "p4",
@@ -64,6 +68,7 @@ export default function ProductsPage() {
       stockStatus: "in-stock",
       status: "inactive",
       shopsCount: 2,
+      image: "https://via.placeholder.com/150",
     },
     {
       id: "p5",
@@ -75,12 +80,14 @@ export default function ProductsPage() {
       status: "inactive",
       shopsCount: 1,
       isDeleted: true,
+      image: "https://via.placeholder.com/150",
     },
   ]);
 
   const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
   const [productModalOpen, setProductModalOpen] = useState(false);
   const [formName, setFormName] = useState("");
+  const [formImage, setFormImage] = useState("");
   const [formCategory, setFormCategory] = useState("Dairy & Eggs");
   const [formSubcategory, setFormSubcategory] = useState("Cheese & Butter");
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
@@ -105,10 +112,12 @@ export default function ProductsPage() {
         stockStatus: "in-stock",
         status: "active",
         shopsCount: 2,
+        image: formImage,
       },
     ]);
     setProductModalOpen(false);
     setFormName("");
+    setFormImage("");
   };
 
   const handleSoftDelete = (id: string) => {
@@ -138,6 +147,7 @@ export default function ProductsPage() {
           <button
             onClick={() => {
               setFormName("");
+              setFormImage("");
               setProductModalOpen(true);
             }}
             className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-1 hover:bg-primary/90"
@@ -165,9 +175,10 @@ export default function ProductsPage() {
       >
         <div className="rounded-2xl bg-white p-6 shadow-1 dark:bg-gray-dark border border-stroke dark:border-stroke-dark overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-dark dark:text-white">
+            <table className="w-full text-left text-sm text-dark dark:text-white whitespace-nowrap">
               <thead className="bg-gray-2 text-xs font-semibold uppercase text-dark-4 dark:bg-dark-2 dark:text-dark-6">
                 <tr>
+                  <th className="p-3">Image</th>
                   <th className="p-3">Product Name</th>
                   <th className="p-3">Category</th>
                   <th className="p-3">Shops Active</th>
@@ -180,6 +191,15 @@ export default function ProductsPage() {
               <tbody className="divide-y divide-stroke dark:divide-stroke-dark">
                 {filteredProducts.map((p) => (
                   <tr key={p.id} className="hover:bg-gray-2 dark:hover:bg-dark-2">
+                    <td className="p-3">
+                      <div className="h-10 w-10 overflow-hidden rounded-lg border border-stroke dark:border-stroke-dark bg-gray-2 dark:bg-dark-2">
+                        {p.image ? (
+                          <img src={p.image} alt={p.name} className="h-full w-full object-cover" />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center text-xs text-dark-4 dark:text-dark-6">N/A</div>
+                        )}
+                      </div>
+                    </td>
                     <td className="p-3 font-bold">{p.name}</td>
                     <td className="p-3">
                       <p className="font-semibold text-dark dark:text-white">{p.category}</p>
@@ -218,6 +238,9 @@ export default function ProductsPage() {
                                   label: "Edit Product",
                                   onClick: () => {
                                     setFormName(p.name);
+                                    setFormCategory(p.category);
+                                    setFormSubcategory(p.subcategory);
+                                    setFormImage(p.image || "");
                                     setProductModalOpen(true);
                                   },
                                   variant: "primary",
@@ -300,6 +323,17 @@ export default function ProductsPage() {
                     className="w-full rounded-lg border border-stroke bg-gray-2 p-2.5 text-sm dark:border-stroke-dark dark:bg-dark-2 dark:text-white"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold mb-1">Image URL</label>
+                <input
+                  type="text"
+                  value={formImage}
+                  onChange={(e) => setFormImage(e.target.value)}
+                  placeholder="https://example.com/image.jpg"
+                  className="w-full rounded-lg border border-stroke bg-gray-2 p-2.5 text-sm dark:border-stroke-dark dark:bg-dark-2 dark:text-white"
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
