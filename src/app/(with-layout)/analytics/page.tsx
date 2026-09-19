@@ -73,7 +73,7 @@ export default function AnalyticsPage() {
               )}
             </div>
             <div className="h-64 flex items-center justify-center bg-gray-2 dark:bg-dark-2 rounded-xl text-dark-4 dark:text-dark-6">
-              [Line Chart Placeholder: Revenue Trend Graph ($4,820 avg/day)]
+              [Line Chart Placeholder: Revenue Trend Graph (₹4,820 avg/day)]
             </div>
           </div>
 
@@ -99,9 +99,9 @@ export default function AnalyticsPage() {
                 </thead>
                 <tbody className="divide-y divide-stroke dark:divide-stroke-dark">
                   {[
-                    { name: "Green Grocery Fresh", orders: 480, rev: "$14,200", aov: "$29.58", pct: "42%" },
-                    { name: "Urban Organic Mart", orders: 320, rev: "$10,800", aov: "$33.75", pct: "32%" },
-                    { name: "Daily Needs Superstore", orders: 210, rev: "$8,600", aov: "$40.95", pct: "26%" },
+                    { name: "Green Grocery Fresh", orders: 480, rev: "₹14,200", aov: "₹29.58", pct: "42%" },
+                    { name: "Urban Organic Mart", orders: 320, rev: "₹10,800", aov: "₹33.75", pct: "32%" },
+                    { name: "Daily Needs Superstore", orders: 210, rev: "₹8,600", aov: "₹40.95", pct: "26%" },
                   ].map((row, i) => (
                     <tr key={i} className="hover:bg-gray-2 dark:hover:bg-dark-2">
                       <td className="p-3 font-semibold">{row.name}</td>
@@ -197,9 +197,9 @@ export default function AnalyticsPage() {
             <h3 className="text-lg font-bold text-dark dark:text-white mb-4">Top Customers by Spend</h3>
             <div className="space-y-3">
               {[
-                { name: "Priya Sharma", orders: 28, spent: "$1,240.00" },
-                { name: "Rajesh Kumar", orders: 22, spent: "$980.50" },
-                { name: "Ananya Roy", orders: 19, spent: "$890.00" },
+                { name: "Priya Sharma", orders: 28, spent: "₹1,240.00" },
+                { name: "Rajesh Kumar", orders: 22, spent: "₹980.50" },
+                { name: "Ananya Roy", orders: 19, spent: "₹890.00" },
               ].map((c, i) => (
                 <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-gray-2 dark:bg-dark-2">
                   <div>
@@ -220,9 +220,9 @@ export default function AnalyticsPage() {
             <h3 className="text-lg font-bold text-dark dark:text-white mb-4">Best-Selling Products</h3>
             <div className="space-y-3">
               {[
-                { name: "Fresh Organic Milk (1L)", shop: "Green Grocery", units: 1420, rev: "$4,260.00" },
-                { name: "Farm Fresh Eggs (12 pk)", shop: "Urban Organic Mart", units: 980, rev: "$3,430.00" },
-                { name: "Whole Wheat Bread", shop: "Daily Needs", units: 850, rev: "$2,125.00" },
+                { name: "Fresh Organic Milk (1L)", shop: "Green Grocery", units: 1420, rev: "₹4,260.00" },
+                { name: "Farm Fresh Eggs (12 pk)", shop: "Urban Organic Mart", units: 980, rev: "₹3,430.00" },
+                { name: "Whole Wheat Bread", shop: "Daily Needs", units: 850, rev: "₹2,125.00" },
               ].map((p, i) => (
                 <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-gray-2 dark:bg-dark-2">
                   <div>

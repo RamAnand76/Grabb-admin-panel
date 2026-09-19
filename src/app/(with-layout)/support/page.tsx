@@ -19,6 +19,8 @@ interface SupportTicket {
 export default function SupportPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingTicket, setEditingTicket] = useState<SupportTicket | null>(null);
 
   const [tickets, setTickets] = useState<SupportTicket[]>([
     { id: "TICK-1082", customerName: "Aarav Sharma", subject: "Items missing from my grocery bag", status: "open", priority: "high", assignedAgent: "Support Rep Sarah", createdDate: "15 mins ago" },
@@ -119,7 +121,10 @@ export default function SupportPage() {
                         },
                         {
                           label: "Edit Ticket",
-                          onClick: () => alert(`Editing ticket: ${t.id}...`),
+                          onClick: () => {
+                            setEditingTicket(t);
+                            setIsEditModalOpen(true);
+                          },
                         },
                       ]}
                     />
@@ -130,6 +135,67 @@ export default function SupportPage() {
           </table>
         </div>
       </div>
+
+      {isEditModalOpen && editingTicket && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl dark:bg-gray-dark">
+            <h2 className="mb-4 text-xl font-bold text-dark dark:text-white">Edit Ticket: {editingTicket.id}</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Status</label>
+                <select 
+                  defaultValue={editingTicket.status}
+                  className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white"
+                >
+                  <option value="open">Open</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Assigned Agent</label>
+                <input 
+                  type="text" 
+                  defaultValue={editingTicket.assignedAgent}
+                  className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white" 
+                />
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Priority</label>
+                <select 
+                  defaultValue={editingTicket.priority}
+                  className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white"
+                >
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setIsEditModalOpen(false);
+                  setEditingTicket(null);
+                }}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-dark-4 hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  alert("Ticket updated!");
+                  setIsEditModalOpen(false);
+                  setEditingTicket(null);
+                }}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90"
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

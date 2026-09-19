@@ -5,7 +5,6 @@ import { createTimeFrameExtractor } from "@/utils/timeframe-extractor";
 import { Suspense } from "react";
 import { OverviewCardsGroup } from "./_components/overview-cards";
 import { OverviewCardsSkeleton } from "./_components/overview-cards/skeleton";
-import { RegionLabels } from "./_components/region-labels";
 
 type PropsType = {
   searchParams: Promise<{
@@ -42,7 +41,6 @@ export default async function Home({ searchParams }: PropsType) {
           timeFrame={extractTimeFrame("used_devices")?.split(":")[1]}
         />
 
-        <RegionLabels />
       </div>
     </>
   );

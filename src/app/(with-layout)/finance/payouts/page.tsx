@@ -19,11 +19,11 @@ export default function PayoutsPage() {
   const [activeTab, setActiveTab] = useState<"shop" | "partner">("shop");
 
   const [payouts, setPayouts] = useState<PayoutRecord[]>([
-    { id: "po1", recipientName: "Green Grocery Fresh", type: "shop", period: "Aug 01 - Aug 07, 2026", ordersCount: 420, amountDue: "$4,280.00", status: "pending" },
-    { id: "po2", recipientName: "Urban Organic Mart", type: "shop", period: "Aug 01 - Aug 07, 2026", ordersCount: 310, amountDue: "$3,150.50", status: "pending" },
-    { id: "po3", recipientName: "Daily Needs Superstore", type: "shop", period: "Jul 25 - Jul 31, 2026", ordersCount: 520, amountDue: "$5,620.00", status: "paid" },
-    { id: "po4", recipientName: "Rahul Sharma (Rider)", type: "partner", period: "Aug 01 - Aug 07, 2026", ordersCount: 48, amountDue: "$482.00", status: "pending" },
-    { id: "po5", recipientName: "Vikram Singh (Rider)", type: "partner", period: "Aug 01 - Aug 07, 2026", ordersCount: 42, amountDue: "$420.00", status: "paid" },
+    { id: "po1", recipientName: "Green Grocery Fresh", type: "shop", period: "Aug 01 - Aug 07, 2026", ordersCount: 420, amountDue: "₹4,280.00", status: "pending" },
+    { id: "po2", recipientName: "Urban Organic Mart", type: "shop", period: "Aug 01 - Aug 07, 2026", ordersCount: 310, amountDue: "₹3,150.50", status: "pending" },
+    { id: "po3", recipientName: "Daily Needs Superstore", type: "shop", period: "Jul 25 - Jul 31, 2026", ordersCount: 520, amountDue: "₹5,620.00", status: "paid" },
+    { id: "po4", recipientName: "Rahul Sharma (Rider)", type: "partner", period: "Aug 01 - Aug 07, 2026", ordersCount: 48, amountDue: "₹482.00", status: "pending" },
+    { id: "po5", recipientName: "Vikram Singh (Rider)", type: "partner", period: "Aug 01 - Aug 07, 2026", ordersCount: 42, amountDue: "₹420.00", status: "paid" },
   ]);
 
   const [confirmTargetId, setConfirmTargetId] = useState<string | null>(null);

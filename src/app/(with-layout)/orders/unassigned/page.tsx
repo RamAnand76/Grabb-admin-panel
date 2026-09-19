@@ -22,9 +22,9 @@ interface Partner {
 
 export default function UnassignedOrdersPage() {
   const [orders, setOrders] = useState<UnassignedOrder[]>([
-    { id: "ORD-94820", shopName: "Urban Organic Mart", itemsCount: 4, amount: "$28.00", waitTime: "25 mins" },
-    { id: "ORD-94818", shopName: "Green Grocery Fresh", itemsCount: 2, amount: "$15.20", waitTime: "40 mins" },
-    { id: "ORD-94815", shopName: "Daily Needs Superstore", itemsCount: 7, amount: "$64.00", waitTime: "12 mins" },
+    { id: "ORD-94820", shopName: "Urban Organic Mart", itemsCount: 4, amount: "₹28.00", waitTime: "25 mins" },
+    { id: "ORD-94818", shopName: "Green Grocery Fresh", itemsCount: 2, amount: "₹15.20", waitTime: "40 mins" },
+    { id: "ORD-94815", shopName: "Daily Needs Superstore", itemsCount: 7, amount: "₹64.00", waitTime: "12 mins" },
   ]);
 
   const [selectedOrder, setSelectedOrder] = useState<UnassignedOrder | null>(null);

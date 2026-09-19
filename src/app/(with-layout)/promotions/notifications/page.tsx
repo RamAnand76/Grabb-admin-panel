@@ -28,7 +28,7 @@ export default function PushNotificationsPage() {
     {
       id: "pn2",
       title: "We miss you! Free delivery inside 🛵",
-      body: "Order today and get free express delivery on orders over $15.",
+      body: "Order today and get free express delivery on orders over ₹15.",
       audience: "Inactive for 30+ days",
       sentDate: "August 08, 2026",
       audienceSize: 1850,

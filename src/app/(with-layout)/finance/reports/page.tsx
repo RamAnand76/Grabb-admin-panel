@@ -8,9 +8,9 @@ export default function ReportsPage() {
   const [shop, setShop] = useState("all");
 
   const reports = [
-    { name: "Monthly Settlement Report - July 2026", date: "Jul 31, 2026", totalRevenue: "$142,500.00", netPayout: "$121,125.00", format: "CSV & PDF" },
-    { name: "Weekly Settlement Report - Aug Week 1", date: "Aug 07, 2026", totalRevenue: "$34,200.00", netPayout: "$29,070.00", format: "CSV & PDF" },
-    { name: "Quarterly Tax & Commission Summary Q2", date: "Jun 30, 2026", totalRevenue: "$380,000.00", netPayout: "$323,000.00", format: "PDF" },
+    { name: "Monthly Settlement Report - July 2026", date: "Jul 31, 2026", totalRevenue: "₹142,500.00", netPayout: "₹121,125.00", format: "CSV & PDF" },
+    { name: "Weekly Settlement Report - Aug Week 1", date: "Aug 07, 2026", totalRevenue: "₹34,200.00", netPayout: "₹29,070.00", format: "CSV & PDF" },
+    { name: "Quarterly Tax & Commission Summary Q2", date: "Jun 30, 2026", totalRevenue: "₹380,000.00", netPayout: "₹323,000.00", format: "PDF" },
   ];
 
   return (

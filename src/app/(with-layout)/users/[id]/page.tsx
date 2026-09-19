@@ -66,7 +66,7 @@ export default function UserDetailPage({ params }: PageProps) {
             </div>
             <div className="flex justify-between py-2 border-b border-stroke dark:border-stroke-dark">
               <span className="text-dark-4 dark:text-dark-6">Total Lifetime Spend:</span>
-              <span className="font-bold text-emerald-500">$1,240.00</span>
+              <span className="font-bold text-emerald-500">₹1,240.00</span>
             </div>
           </div>
         </div>
@@ -110,9 +110,9 @@ export default function UserDetailPage({ params }: PageProps) {
                   </thead>
                   <tbody className="divide-y divide-stroke dark:divide-stroke-dark">
                     {[
-                      { id: "ORD-94821", shop: "Green Grocery Fresh", amount: "$42.50", status: "out-for-delivery" },
-                      { id: "ORD-94100", shop: "Urban Organic Mart", amount: "$78.00", status: "delivered" },
-                      { id: "ORD-93500", shop: "Daily Needs Superstore", amount: "$35.20", status: "delivered" },
+                      { id: "ORD-94821", shop: "Green Grocery Fresh", amount: "₹42.50", status: "out-for-delivery" },
+                      { id: "ORD-94100", shop: "Urban Organic Mart", amount: "₹78.00", status: "delivered" },
+                      { id: "ORD-93500", shop: "Daily Needs Superstore", amount: "₹35.20", status: "delivered" },
                     ].map((row, i) => (
                       <tr key={i} className="hover:bg-gray-2 dark:hover:bg-dark-2">
                         <td className="p-3 font-bold text-primary">

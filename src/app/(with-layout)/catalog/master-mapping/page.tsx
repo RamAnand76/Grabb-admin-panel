@@ -15,11 +15,12 @@ interface MasterProduct {
 
 export default function MasterCatalogMappingPage() {
   const [search, setSearch] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [masterProducts, setMasterProducts] = useState<MasterProduct[]>([
-    { id: "mp-1", name: "Coca-Cola 2L PET", barcode: "890103001001", category: "Beverages", globalPriceRef: "$2.00", mappedShops: 42 },
-    { id: "mp-2", name: "Amul Butter 100g", barcode: "890126215001", category: "Dairy", globalPriceRef: "$0.80", mappedShops: 65 },
-    { id: "mp-3", name: "Lays Classic Salted 50g", barcode: "890149110001", category: "Snacks", globalPriceRef: "$0.50", mappedShops: 58 },
+    { id: "mp-1", name: "Coca-Cola 2L PET", barcode: "890103001001", category: "Beverages", globalPriceRef: "₹2.00", mappedShops: 42 },
+    { id: "mp-2", name: "Amul Butter 100g", barcode: "890126215001", category: "Dairy", globalPriceRef: "₹0.80", mappedShops: 65 },
+    { id: "mp-3", name: "Lays Classic Salted 50g", barcode: "890149110001", category: "Snacks", globalPriceRef: "₹0.50", mappedShops: 58 },
   ]);
 
   const filteredProducts = masterProducts.filter((p) =>
@@ -36,7 +37,7 @@ export default function MasterCatalogMappingPage() {
           </p>
         </div>
         <button
-          onClick={() => alert("Opening Add Master Product Modal")}
+          onClick={() => setIsModalOpen(true)}
           className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-1 hover:bg-primary/90 transition-colors self-start sm:self-auto"
         >
           + Create Master SKU
@@ -84,6 +85,55 @@ export default function MasterCatalogMappingPage() {
           </table>
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl dark:bg-gray-dark">
+            <h2 className="mb-4 text-xl font-bold text-dark dark:text-white">Create Master SKU</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Product Name</label>
+                <input type="text" className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white" placeholder="e.g. Coca-Cola 2L PET" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Barcode (EAN/UPC)</label>
+                  <input type="text" className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white" placeholder="e.g. 890103001001" />
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Category</label>
+                  <select className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white">
+                    <option value="beverages">Beverages</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="snacks">Snacks</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Reference Price (₹)</label>
+                <input type="number" className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white" placeholder="0.00" />
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-dark-4 hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  alert("Master SKU created!");
+                  setIsModalOpen(false);
+                }}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90"
+              >
+                Create SKU
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -24,10 +24,10 @@ export default function UsersPage() {
   const [blockTargetId, setBlockTargetId] = useState<string | null>(null);
 
   const [users, setUsers] = useState<UserCustomer[]>([
-    { id: "u1", name: "Aarav Sharma", phone: "+91 98765 43210", email: "aarav@example.com", totalOrders: 28, totalSpent: "$1,240.00", joinedDate: "Jan 12, 2026", status: "active" },
-    { id: "u2", name: "Neha Gupta", phone: "+91 98123 45678", email: "neha@example.com", totalOrders: 14, totalSpent: "$580.50", joinedDate: "Feb 04, 2026", status: "active" },
-    { id: "u3", name: "Rohan Verma", phone: "+91 97111 22233", email: "rohan@example.com", totalOrders: 9, totalSpent: "$390.00", joinedDate: "Mar 18, 2026", status: "active" },
-    { id: "u4", name: "Spam Customer", phone: "+91 90000 00000", email: "spam@example.com", totalOrders: 1, totalSpent: "$12.00", joinedDate: "Aug 01, 2026", status: "inactive" },
+    { id: "u1", name: "Aarav Sharma", phone: "+91 98765 43210", email: "aarav@example.com", totalOrders: 28, totalSpent: "₹1,240.00", joinedDate: "Jan 12, 2026", status: "active" },
+    { id: "u2", name: "Neha Gupta", phone: "+91 98123 45678", email: "neha@example.com", totalOrders: 14, totalSpent: "₹580.50", joinedDate: "Feb 04, 2026", status: "active" },
+    { id: "u3", name: "Rohan Verma", phone: "+91 97111 22233", email: "rohan@example.com", totalOrders: 9, totalSpent: "₹390.00", joinedDate: "Mar 18, 2026", status: "active" },
+    { id: "u4", name: "Spam Customer", phone: "+91 90000 00000", email: "spam@example.com", totalOrders: 1, totalSpent: "₹12.00", joinedDate: "Aug 01, 2026", status: "inactive" },
   ]);
 
   const filteredUsers = users.filter((u) => {

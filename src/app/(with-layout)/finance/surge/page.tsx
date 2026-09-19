@@ -15,9 +15,9 @@ interface SurgeZone {
 
 export default function SurgePricingPage() {
   const [zones, setZones] = useState<SurgeZone[]>([
-    { id: "z1", name: "Downtown Metro", baseFee: "$2.50", surgeMultiplier: 1.5, surgeReason: "High Demand", activeDrivers: 15, pendingOrders: 45, isActive: true },
-    { id: "z2", name: "North Hills Suburb", baseFee: "$4.00", surgeMultiplier: 1.0, surgeReason: "None", activeDrivers: 8, pendingOrders: 10, isActive: false },
-    { id: "z3", name: "University District", baseFee: "$1.80", surgeMultiplier: 2.0, surgeReason: "Rain", activeDrivers: 4, pendingOrders: 32, isActive: true },
+    { id: "z1", name: "Downtown Metro", baseFee: "₹2.50", surgeMultiplier: 1.5, surgeReason: "High Demand", activeDrivers: 15, pendingOrders: 45, isActive: true },
+    { id: "z2", name: "North Hills Suburb", baseFee: "₹4.00", surgeMultiplier: 1.0, surgeReason: "None", activeDrivers: 8, pendingOrders: 10, isActive: false },
+    { id: "z3", name: "University District", baseFee: "₹1.80", surgeMultiplier: 2.0, surgeReason: "Rain", activeDrivers: 4, pendingOrders: 32, isActive: true },
   ]);
 
   const toggleSurge = (id: string) => {

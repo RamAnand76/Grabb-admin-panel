@@ -23,10 +23,10 @@ export default function CouponsPage() {
   const [tab, setTab] = useState<"active" | "trash">("active");
 
   const [coupons, setCoupons] = useState<Coupon[]>([
-    { id: "c1", code: "WELCOME50", type: "%", value: "50%", minOrder: "$20.00", maxDiscount: "$10.00", validDates: "Aug 01 - Aug 31, 2026", usageCount: 420, usageLimit: 1000, status: "active" },
-    { id: "c2", code: "FREESHIP", type: "flat", value: "$4.00", minOrder: "$30.00", maxDiscount: "$4.00", validDates: "Aug 10 - Aug 20, 2026", usageCount: 180, usageLimit: 500, status: "active" },
-    { id: "c3", code: "SUMMER15", type: "%", value: "15%", minOrder: "$50.00", maxDiscount: "$15.00", validDates: "Jul 01 - Jul 31, 2026", usageCount: 500, usageLimit: 500, status: "inactive" },
-    { id: "c4", code: "EXPIRED20", type: "%", value: "20%", minOrder: "$15.00", maxDiscount: "$5.00", validDates: "Jun 01 - Jun 30, 2026", usageCount: 120, usageLimit: 200, status: "inactive", isDeleted: true },
+    { id: "c1", code: "WELCOME50", type: "%", value: "50%", minOrder: "₹20.00", maxDiscount: "₹10.00", validDates: "Aug 01 - Aug 31, 2026", usageCount: 420, usageLimit: 1000, status: "active" },
+    { id: "c2", code: "FREESHIP", type: "flat", value: "₹4.00", minOrder: "₹30.00", maxDiscount: "₹4.00", validDates: "Aug 10 - Aug 20, 2026", usageCount: 180, usageLimit: 500, status: "active" },
+    { id: "c3", code: "SUMMER15", type: "%", value: "15%", minOrder: "₹50.00", maxDiscount: "₹15.00", validDates: "Jul 01 - Jul 31, 2026", usageCount: 500, usageLimit: 500, status: "inactive" },
+    { id: "c4", code: "EXPIRED20", type: "%", value: "20%", minOrder: "₹15.00", maxDiscount: "₹5.00", validDates: "Jun 01 - Jun 30, 2026", usageCount: 120, usageLimit: 200, status: "inactive", isDeleted: true },
   ]);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -44,8 +44,8 @@ export default function CouponsPage() {
         code: code.toUpperCase(),
         type,
         value: type === "%" ? `${val}%` : `$${val}`,
-        minOrder: "$25.00",
-        maxDiscount: "$10.00",
+        minOrder: "₹25.00",
+        maxDiscount: "₹10.00",
         validDates: "Aug 10 - Sep 10, 2026",
         usageCount: 0,
         usageLimit: 500,

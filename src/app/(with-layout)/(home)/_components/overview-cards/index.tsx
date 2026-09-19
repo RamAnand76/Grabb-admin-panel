@@ -8,7 +8,7 @@ export async function OverviewCardsGroup() {
       <OverviewCard
         label="Monthly Subscription Rev"
         data={{
-          value: "$12,450",
+          value: "₹12,450",
           growthRate: 14.2,
         }}
         Icon={icons.Profit}

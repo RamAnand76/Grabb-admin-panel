@@ -28,8 +28,8 @@ export function DonutChart({ data }: PropsType) {
         vertical: 5,
       },
       formatter: (legendName, opts) => {
-        const { seriesPercent } = opts.w.globals;
-        return `${legendName}: ${seriesPercent[opts.seriesIndex]}%`;
+        const value = opts.w.globals.seriesTotals[opts.seriesIndex];
+        return `${legendName}: ${compactFormat(value)}`;
       },
     },
     plotOptions: {
@@ -42,7 +42,7 @@ export function DonutChart({ data }: PropsType) {
             total: {
               show: true,
               showAlways: true,
-              label: "Visitors",
+              label: "Users",
               fontSize: "16px",
               fontWeight: "400",
             },

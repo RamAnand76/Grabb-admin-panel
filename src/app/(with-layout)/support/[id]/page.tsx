@@ -192,7 +192,7 @@ export default function TicketDetailPage({ params }: PageProps) {
                 <Link href="/orders/ORD-94821">ORD-94821 →</Link>
               </p>
               <p className="text-dark-4 dark:text-dark-6">Shop: Green Grocery Fresh</p>
-              <p className="font-bold text-emerald-500">$42.50 • Out for Delivery</p>
+              <p className="font-bold text-emerald-500">₹42.50 • Out for Delivery</p>
             </div>
           </div>
         </div>

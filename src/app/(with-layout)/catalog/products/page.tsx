@@ -31,7 +31,7 @@ export default function ProductsPage() {
       name: "Fresh Organic Milk 1L",
       category: "Dairy & Eggs",
       subcategory: "Cheese & Butter",
-      priceRange: "$3.20 - $3.60",
+      priceRange: "₹3.20 - ₹3.60",
       stockStatus: "in-stock",
       status: "active",
       shopsCount: 3,
@@ -42,7 +42,7 @@ export default function ProductsPage() {
       name: "Farm Fresh Eggs 12pk",
       category: "Dairy & Eggs",
       subcategory: "Cheese & Butter",
-      priceRange: "$4.00 - $4.50",
+      priceRange: "₹4.00 - ₹4.50",
       stockStatus: "low",
       status: "active",
       shopsCount: 2,
@@ -53,7 +53,7 @@ export default function ProductsPage() {
       name: "Avocado Hass (Pack of 2)",
       category: "Fresh Fruits",
       subcategory: "Citrus Fruits",
-      priceRange: "$5.90",
+      priceRange: "₹5.90",
       stockStatus: "out",
       status: "active",
       shopsCount: 3,
@@ -64,7 +64,7 @@ export default function ProductsPage() {
       name: "Organic Brown Bread 400g",
       category: "Bakery & Bread",
       subcategory: "Whole Grain",
-      priceRange: "$2.80 - $3.10",
+      priceRange: "₹2.80 - ₹3.10",
       stockStatus: "in-stock",
       status: "inactive",
       shopsCount: 2,
@@ -75,7 +75,7 @@ export default function ProductsPage() {
       name: "Discontinued Seasoning Mix",
       category: "Spices",
       subcategory: "Mixes",
-      priceRange: "$1.50",
+      priceRange: "₹1.50",
       stockStatus: "out",
       status: "inactive",
       shopsCount: 1,
@@ -108,7 +108,7 @@ export default function ProductsPage() {
         name: formName,
         category: formCategory,
         subcategory: formSubcategory,
-        priceRange: "$3.50",
+        priceRange: "₹3.50",
         stockStatus: "in-stock",
         status: "active",
         shopsCount: 2,
@@ -374,7 +374,7 @@ export default function ProductsPage() {
                       <input
                         type="text"
                         placeholder="Price ($)"
-                        defaultValue="$3.50"
+                        defaultValue="₹3.50"
                         className="w-1/4 rounded border border-stroke p-1.5 text-xs text-dark dark:bg-gray-dark dark:text-white"
                       />
                       <input

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FilterBar } from "@/components/common/filter-bar";
 import { StatusBadge } from "@/components/common/status-badge";
 import { TableActionsDropdown } from "@/components/common/table-actions-dropdown";
+import { DynamicMap } from "@/components/Map";
 
 interface Zone {
   id: string;
@@ -18,12 +19,13 @@ export default function ZonesPage() {
   const [viewTab, setViewTab] = useState<"list" | "map">("list");
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("all");
+  const [isDrawModalOpen, setIsDrawModalOpen] = useState(false);
 
   const [zones, setZones] = useState<Zone[]>([
-    { id: "z1", name: "Downtown Metro", coverageArea: "12.5 sq km", baseFee: "$2.50", assignedShops: 45, status: "active" },
-    { id: "z2", name: "North Hills Suburb", coverageArea: "28.0 sq km", baseFee: "$4.00", assignedShops: 12, status: "active" },
-    { id: "z3", name: "University District", coverageArea: "8.2 sq km", baseFee: "$1.80", assignedShops: 34, status: "active" },
-    { id: "z4", name: "Westside Industrial", coverageArea: "15.0 sq km", baseFee: "$3.50", assignedShops: 5, status: "inactive" },
+    { id: "z1", name: "Downtown Metro", coverageArea: "12.5 sq km", baseFee: "₹2.50", assignedShops: 45, status: "active" },
+    { id: "z2", name: "North Hills Suburb", coverageArea: "28.0 sq km", baseFee: "₹4.00", assignedShops: 12, status: "active" },
+    { id: "z3", name: "University District", coverageArea: "8.2 sq km", baseFee: "₹1.80", assignedShops: 34, status: "active" },
+    { id: "z4", name: "Westside Industrial", coverageArea: "15.0 sq km", baseFee: "₹3.50", assignedShops: 5, status: "inactive" },
   ]);
 
   const filteredZones = zones.filter((z) => {
@@ -42,10 +44,7 @@ export default function ZonesPage() {
           </p>
         </div>
         <button
-          onClick={() => {
-            setViewTab("map");
-            setTimeout(() => alert("Opening Map Editor..."), 100);
-          }}
+          onClick={() => setIsDrawModalOpen(true)}
           className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-1 hover:bg-primary/90 transition-colors self-start sm:self-auto"
         >
           + Draw New Zone
@@ -78,17 +77,7 @@ export default function ZonesPage() {
       {viewTab === "map" ? (
         /* Map Placeholder */
       <div className="w-full h-[400px] rounded-2xl bg-gray-2 dark:bg-dark-2 border border-stroke dark:border-stroke-dark overflow-hidden flex items-center justify-center relative">
-        <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0ibm9uZSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAyMEg0ME0yMCAwVjQwIiBzdHJva2U9IiM5Q0EyQTgiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')",
-            backgroundSize: "40px 40px"
-        }} />
-        <div className="z-10 text-center space-y-3 p-6 bg-white dark:bg-gray-dark rounded-xl shadow-lg max-w-md">
-            <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            </div>
-            <h3 className="font-bold text-dark dark:text-white">Interactive Map Ready</h3>
-            <p className="text-sm text-dark-4 dark:text-dark-6">This container is ready for Mapbox or Google Maps integration to draw Geofence polygons visually.</p>
-        </div>
+        <DynamicMap type="zones" />
       </div>
       ) : (
         <>
@@ -146,6 +135,56 @@ export default function ZonesPage() {
         </div>
       </div>
         </>
+      )}
+
+      {isDrawModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl dark:bg-gray-dark">
+            <h2 className="mb-4 text-xl font-bold text-dark dark:text-white">Draw New Zone</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Zone Name</label>
+                <input type="text" className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white" placeholder="e.g. Downtown Metro" />
+              </div>
+              <div className="h-[200px] w-full rounded-lg border border-stroke overflow-hidden relative">
+                <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-black/10">
+                  <span className="bg-white px-2 py-1 rounded text-xs font-bold text-primary shadow">Click Map to Draw Points</span>
+                </div>
+                <DynamicMap type="zones" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Base Fee (₹)</label>
+                  <input type="number" className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white" placeholder="0.00" />
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Status</label>
+                  <select className="w-full rounded-lg border border-stroke bg-transparent p-3 text-dark outline-none focus:border-primary dark:border-stroke-dark dark:text-white">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                onClick={() => setIsDrawModalOpen(false)}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-dark-4 hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  alert("Zone created!");
+                  setIsDrawModalOpen(false);
+                }}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90"
+              >
+                Save Zone
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

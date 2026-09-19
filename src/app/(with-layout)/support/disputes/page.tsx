@@ -21,9 +21,9 @@ export default function DisputesPage() {
   const [selectedStatus, setSelectedStatus] = useState("all");
 
   const [disputes, setDisputes] = useState<Dispute[]>([
-    { id: "dsp-101", orderId: "ORD-94821", customerName: "Aarav Sharma", shopName: "Green Grocery Fresh", driverName: "Rahul Sharma", issue: "Missing 1x Organic Milk 1L", refundRequested: "$3.50", status: "open" },
-    { id: "dsp-102", orderId: "ORD-94815", customerName: "Neha Gupta", shopName: "Urban Organic Mart", driverName: "Vikram Singh", issue: "Damaged Eggs (Broken during transit)", refundRequested: "$4.00", status: "open" },
-    { id: "dsp-103", orderId: "ORD-94780", customerName: "Rohan Verma", shopName: "Daily Needs Superstore", driverName: "Amit Patel", issue: "Wrong item delivered (Got Apple instead of Avocado)", refundRequested: "$5.90", status: "resolved", liability: "shop" },
+    { id: "dsp-101", orderId: "ORD-94821", customerName: "Aarav Sharma", shopName: "Green Grocery Fresh", driverName: "Rahul Sharma", issue: "Missing 1x Organic Milk 1L", refundRequested: "₹3.50", status: "open" },
+    { id: "dsp-102", orderId: "ORD-94815", customerName: "Neha Gupta", shopName: "Urban Organic Mart", driverName: "Vikram Singh", issue: "Damaged Eggs (Broken during transit)", refundRequested: "₹4.00", status: "open" },
+    { id: "dsp-103", orderId: "ORD-94780", customerName: "Rohan Verma", shopName: "Daily Needs Superstore", driverName: "Amit Patel", issue: "Wrong item delivered (Got Apple instead of Avocado)", refundRequested: "₹5.90", status: "resolved", liability: "shop" },
   ]);
 
   const [resolveModal, setResolveModal] = useState<Dispute | null>(null);

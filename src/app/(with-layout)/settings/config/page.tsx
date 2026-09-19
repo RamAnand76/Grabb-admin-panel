@@ -7,7 +7,7 @@ export default function AppConfigPage() {
   const [minOrder, setMinOrder] = useState(10.0);
   const [defaultRadius, setDefaultRadius] = useState(7.0);
   const [bannerActive, setBannerActive] = useState(true);
-  const [announcementText, setAnnouncementText] = useState("🎉 Monsoon Offer: Get Free Delivery on orders above $35!");
+  const [announcementText, setAnnouncementText] = useState("🎉 Monsoon Offer: Get Free Delivery on orders above ₹35!");
 
   return (
     <div className="space-y-6">

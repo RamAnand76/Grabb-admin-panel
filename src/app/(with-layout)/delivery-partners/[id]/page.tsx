@@ -155,11 +155,11 @@ export default function PartnerDetailPage({ params }: PageProps) {
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4 rounded-xl bg-gray-2 dark:bg-dark-2">
               <p className="text-xs text-dark-4 dark:text-dark-6">This Week's Earnings</p>
-              <p className="text-2xl font-bold text-emerald-500">$482.00</p>
+              <p className="text-2xl font-bold text-emerald-500">₹482.00</p>
             </div>
             <div className="p-4 rounded-xl bg-gray-2 dark:bg-dark-2">
               <p className="text-xs text-dark-4 dark:text-dark-6">Pending Payout</p>
-              <p className="text-2xl font-bold text-amber-500">$142.50</p>
+              <p className="text-2xl font-bold text-amber-500">₹142.50</p>
             </div>
           </div>
         </div>

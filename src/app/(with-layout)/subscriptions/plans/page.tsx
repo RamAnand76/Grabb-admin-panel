@@ -21,7 +21,7 @@ export default function SubscriptionPlans() {
     {
       id: "SUB-PLAN-1",
       name: "Lite Starter",
-      price: "$19.99",
+      price: "₹19.99",
       billingPeriod: "Monthly",
       orderLimit: "150 orders/mo",
       activeSubscribers: 42,
@@ -31,7 +31,7 @@ export default function SubscriptionPlans() {
     {
       id: "SUB-PLAN-2",
       name: "Growth Professional",
-      price: "$49.99",
+      price: "₹49.99",
       billingPeriod: "Monthly",
       orderLimit: "1,000 orders/mo",
       activeSubscribers: 128,
@@ -41,7 +41,7 @@ export default function SubscriptionPlans() {
     {
       id: "SUB-PLAN-3",
       name: "Enterprise Elite",
-      price: "$149.99",
+      price: "₹149.99",
       billingPeriod: "Monthly",
       orderLimit: "Unlimited",
       activeSubscribers: 35,
@@ -51,7 +51,7 @@ export default function SubscriptionPlans() {
     {
       id: "SUB-PLAN-4",
       name: "Legacy Trial",
-      price: "$0.00",
+      price: "₹0.00",
       billingPeriod: "One-time",
       orderLimit: "20 orders total",
       activeSubscribers: 8,
@@ -61,6 +61,7 @@ export default function SubscriptionPlans() {
   ]);
 
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleSelectRow = (id: string) => {
     setSelectedIds((prev) =>
@@ -87,7 +88,7 @@ export default function SubscriptionPlans() {
           </p>
         </div>
         <button
-          onClick={() => alert("Creating new subscription plan...")}
+          onClick={() => setIsModalOpen(true)}
           className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-1 hover:bg-primary/90 transition-colors self-start sm:self-auto"
         >
           Add New Plan

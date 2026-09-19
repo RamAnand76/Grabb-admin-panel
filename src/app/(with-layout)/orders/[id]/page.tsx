@@ -131,10 +131,10 @@ export default function OrderDetailPage({ params }: PageProps) {
                 </thead>
                 <tbody className="divide-y divide-stroke dark:divide-stroke-dark">
                   {[
-                    { name: "Fresh Organic Whole Milk 1L", price: "$3.50", qty: 2, sub: "$7.00" },
-                    { name: "Farm Fresh Large Eggs 12pk", price: "$4.20", qty: 1, sub: "$4.20" },
-                    { name: "Organic Brown Bread 400g", price: "$2.80", qty: 3, sub: "$8.40" },
-                    { name: "Avocado Hass (Pack of 2)", price: "$5.90", qty: 2, sub: "$11.80" },
+                    { name: "Fresh Organic Whole Milk 1L", price: "₹3.50", qty: 2, sub: "₹7.00" },
+                    { name: "Farm Fresh Large Eggs 12pk", price: "₹4.20", qty: 1, sub: "₹4.20" },
+                    { name: "Organic Brown Bread 400g", price: "₹2.80", qty: 3, sub: "₹8.40" },
+                    { name: "Avocado Hass (Pack of 2)", price: "₹5.90", qty: 2, sub: "₹11.80" },
                   ].map((item, idx) => (
                     <tr key={idx} className="hover:bg-gray-2 dark:hover:bg-dark-2">
                       <td className="p-3 font-semibold">{item.name}</td>
@@ -151,23 +151,23 @@ export default function OrderDetailPage({ params }: PageProps) {
             <div className="mt-6 border-t border-stroke dark:border-stroke-dark pt-4 max-w-xs ml-auto space-y-2 text-sm">
               <div className="flex justify-between text-dark-4 dark:text-dark-6">
                 <span>Subtotal</span>
-                <span className="font-semibold text-dark dark:text-white">$31.40</span>
+                <span className="font-semibold text-dark dark:text-white">₹31.40</span>
               </div>
               <div className="flex justify-between text-dark-4 dark:text-dark-6">
                 <span>Delivery Fee</span>
-                <span className="font-semibold text-dark dark:text-white">$4.00</span>
+                <span className="font-semibold text-dark dark:text-white">₹4.00</span>
               </div>
               <div className="flex justify-between text-dark-4 dark:text-dark-6">
                 <span>Taxes & Service</span>
-                <span className="font-semibold text-dark dark:text-white">$2.10</span>
+                <span className="font-semibold text-dark dark:text-white">₹2.10</span>
               </div>
               <div className="flex justify-between text-emerald-500 font-semibold">
                 <span>Discount (WELCOME5)</span>
-                <span>-$5.00</span>
+                <span>-₹5.00</span>
               </div>
               <div className="flex justify-between border-t border-stroke dark:border-stroke-dark pt-2 text-base font-bold text-dark dark:text-white">
                 <span>Total Amount</span>
-                <span className="text-emerald-500">$32.50</span>
+                <span className="text-emerald-500">₹32.50</span>
               </div>
             </div>
           </div>
@@ -246,9 +246,9 @@ export default function OrderDetailPage({ params }: PageProps) {
       <ConfirmModal
         isOpen={refundModalOpen}
         onClose={() => setRefundModalOpen(false)}
-        onConfirm={() => alert("Refund of $32.50 processed to customer original payment method.")}
+        onConfirm={() => alert("Refund of ₹32.50 processed to customer original payment method.")}
         title="Initiate Full Refund"
-        description="Are you sure you want to refund $32.50 for this order?"
+        description="Are you sure you want to refund ₹32.50 for this order?"
         confirmLabel="Process Refund"
         variant="warning"
       />

@@ -229,9 +229,9 @@ export default function ShopDetailPage({ params }: PageProps) {
           </div>
           <div className="space-y-2">
             {[
-              { name: "Fresh Organic Whole Milk 1L", price: "$3.50", stock: 54 },
-              { name: "Farm Fresh Large Eggs 12pk", price: "$4.20", stock: 22 },
-              { name: "Organic Brown Bread 400g", price: "$2.80", stock: 18 },
+              { name: "Fresh Organic Whole Milk 1L", price: "₹3.50", stock: 54 },
+              { name: "Farm Fresh Large Eggs 12pk", price: "₹4.20", stock: 22 },
+              { name: "Organic Brown Bread 400g", price: "₹2.80", stock: 18 },
             ].map((p, i) => (
               <div key={i} className="flex justify-between items-center p-3 rounded-lg bg-gray-2 dark:bg-dark-2">
                 <span className="text-sm font-semibold">{p.name}</span>
